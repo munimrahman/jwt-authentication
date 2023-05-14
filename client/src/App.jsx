@@ -1,20 +1,43 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Home from "./components/Home/Home";
+import Main from "./components/Layout/Main";
+import DashBoard from "./components/DashBoard/DashBoard";
+import Login from "./components/Login/Login";
+import Registration from "./components/Registration/Registration";
+import Products from "./components/Products/Products";
 
 function App() {
-  return (
-    <>
-      <h1 className="text-5xl">Hello World</h1>
-      <button className="btn">Button</button>
-      <button className="btn btn-primary">Button</button>
-      <button className="btn btn-secondary">Button</button>
-      <button className="btn btn-accent">Button</button>
-      <button className="btn btn-ghost">Button</button>
-      <button className="btn btn-link">Button</button>
-    </>
-  );
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Main />,
+      children: [
+        {
+          path: "/",
+          element: <Home />,
+        },
+        {
+          path: "/login",
+          element: <Login />,
+        },
+        {
+          path: "/registration",
+          element: <Registration />,
+        },
+        {
+          path: "/dashboard",
+          element: <DashBoard />,
+        },
+        {
+          path: "/products",
+          element: <Products />,
+        },
+      ],
+    },
+  ]);
+
+  return <RouterProvider router={router} />;
 }
 
 export default App;

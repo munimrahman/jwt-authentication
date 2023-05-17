@@ -2,14 +2,18 @@ const express = require("express");
 const cors = require("cors");
 const authRouter = require("./routes/auth.route");
 const productRouter = require("./routes/product.route");
+const morgan = require("morgan");
+const cookieParser = require("cookie-parser");
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(morgan("tiny"));
+app.use(cookieParser("process.env.COOKIE_SECRET"));
 
 app.get("/", (req, res) => {
-  res.send("Hello From Job Portal Server");
+  res.send("Hello JWT Auth Server");
 });
 
 // Routes

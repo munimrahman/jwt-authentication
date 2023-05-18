@@ -9,18 +9,6 @@ exports.signUp = async (req, res, next) => {
     const accessToken = generateJwtToken(user, "1h");
     const refreshToken = generateJwtToken(user, "1d");
 
-    // res.cookie("jwt-access", accessToken, {
-    //   maxAge: 24154,
-    //   httpOnly: true,
-    //   signed: true,
-    // });
-
-    // res.cookie("jwt-refresh", refreshToken, {
-    //   maxAge: 5454654,
-    //   httpOnly: true,
-    //   signed: true,
-    // });
-
     res
       .status(200)
       .cookie("jwt-access", accessToken, {

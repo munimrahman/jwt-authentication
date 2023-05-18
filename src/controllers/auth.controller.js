@@ -79,7 +79,7 @@ exports.logIn = async (req, res, next) => {
       });
     }
 
-    const accessToken = generateJwtToken(user, "1h");
+    const accessToken = generateJwtToken(user, "1m");
     const refreshToken = generateJwtToken(user, "1d");
 
     res

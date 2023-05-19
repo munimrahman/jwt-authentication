@@ -10,6 +10,7 @@ const { promisify } = require("util");
 
 module.exports = async (req, res, next) => {
   try {
+    console.log(JSON.stringify(req.signedCookies));
     const token = req.headers?.authorization?.split(" ")?.[1];
     if (!token) {
       return res.status(401).send({
@@ -19,7 +20,7 @@ module.exports = async (req, res, next) => {
     }
 
     const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
-    console.log(decoded);
+
     req.user = decoded;
 
     next();

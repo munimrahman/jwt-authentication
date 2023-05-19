@@ -1,5 +1,4 @@
 const Product = require("../models/Product");
-const User = require("../models/User");
 
 exports.postProductService = async (data) => {
   const result = await Product.create(data);

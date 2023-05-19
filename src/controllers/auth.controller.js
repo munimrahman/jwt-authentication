@@ -12,15 +12,20 @@ exports.signUp = async (req, res, next) => {
     res
       .status(200)
       .cookie("jwt-access", accessToken, {
-        maxAge: 24154,
+        maxAge: 24 * 60 * 60 * 1000,
         httpOnly: true,
         signed: true,
+        sameSite: "none",
+        secure: true,
       })
       .cookie("jwt-refresh", refreshToken, {
-        maxAge: 5454654,
+        maxAge: 30 * 24 * 60 * 60 * 1000,
         httpOnly: true,
         signed: true,
+        sameSite: "none",
+        secure: true,
       })
+      .header("Access-Control-Allow-Origin", "http://localhost:5173")
       .send({
         success: true,
         message: "User Created Successfully",
@@ -85,14 +90,18 @@ exports.logIn = async (req, res, next) => {
     res
       .status(200)
       .cookie("jwt-access", accessToken, {
-        maxAge: 24154,
+        maxAge: 30 * 1000,
         httpOnly: true,
         signed: true,
+        sameSite: "none",
+        secure: true,
       })
       .cookie("jwt-refresh", refreshToken, {
-        maxAge: 5454654,
+        maxAge: 30 * 24 * 60 * 60 * 1000,
         httpOnly: true,
         signed: true,
+        sameSite: "none",
+        secure: true,
       })
       .send({
         success: true,

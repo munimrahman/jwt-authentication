@@ -7,7 +7,16 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     const loginCredential = { email, password };
-    console.log(loginCredential);
+    // console.log(loginCredential);
+    fetch("http://localhost:5000/log-in", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      withCredentials: true,
+      credentials: "include",
+      body: JSON.stringify(loginCredential),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
   };
 
   return (

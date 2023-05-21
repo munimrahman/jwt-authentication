@@ -6,8 +6,15 @@ import DashBoard from "./components/DashBoard/DashBoard";
 import Login from "./components/Login/Login";
 import Registration from "./components/Registration/Registration";
 import Products from "./components/Products/Products";
+import Protected from "./components/Protected/Protected";
+import useAuthCheck from "./hooks/useAuthCheck";
+import PublicRoute from "./Routes/PublicRoute/PublicRoute";
+import PrivateRoute from "./Routes/PrivateRoute/PrivateRoute";
+import AdminRoute from "./Routes/AdminRoute/AdminRoute";
+import UserRoute from "./Routes/UserRoute/UserRoute";
 
 function App() {
+  const authCheck = useAuthCheck();
   const router = createBrowserRouter([
     {
       path: "/",
@@ -19,25 +26,49 @@ function App() {
         },
         {
           path: "/login",
-          element: <Login />,
+          element: (
+            <PublicRoute>
+              <Login />
+            </PublicRoute>
+          ),
         },
         {
           path: "/registration",
-          element: <Registration />,
+          element: (
+            <PublicRoute>
+              <Registration />
+            </PublicRoute>
+          ),
+        },
+        {
+          path: "/protected",
+          element: (
+            <PrivateRoute>
+              <Protected />
+            </PrivateRoute>
+          ),
         },
         {
           path: "/dashboard",
-          element: <DashBoard />,
+          element: (
+            <AdminRoute>
+              <DashBoard />
+            </AdminRoute>
+          ),
         },
         {
           path: "/products",
-          element: <Products />,
+          element: (
+            <UserRoute>
+              <Products />
+            </UserRoute>
+          ),
         },
       ],
     },
   ]);
 
-  return <RouterProvider router={router} />;
+  return authCheck && <RouterProvider router={router} />;
 }
 
 export default App;

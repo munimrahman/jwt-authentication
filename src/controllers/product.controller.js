@@ -23,7 +23,7 @@ exports.getAllProducts = async (req, res, next) => {
       success: true,
       data: {
         count: r.resultCount,
-        jobs: r.result,
+        products: r.result,
       },
     });
   } catch (error) {

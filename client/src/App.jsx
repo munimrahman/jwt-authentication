@@ -8,10 +8,6 @@ import Registration from "./components/Registration/Registration";
 import Products from "./components/Products/Products";
 import Protected from "./components/Protected/Protected";
 import useAuthCheck from "./hooks/useAuthCheck";
-import PublicRoute from "./Routes/PublicRoute/PublicRoute";
-import PrivateRoute from "./Routes/PrivateRoute/PrivateRoute";
-import AdminRoute from "./Routes/AdminRoute/AdminRoute";
-import UserRoute from "./Routes/UserRoute/UserRoute";
 
 function App() {
   const authCheck = useAuthCheck();
@@ -22,46 +18,42 @@ function App() {
       children: [
         {
           path: "/",
+          // can see all user (log in or log out)
           element: <Home />,
         },
         {
           path: "/login",
           element: (
-            <PublicRoute>
-              <Login />
-            </PublicRoute>
+            // only can see if not log in, if user logged in it will not visible to user
+            <Login />
           ),
         },
         {
           path: "/registration",
           element: (
-            <PublicRoute>
-              <Registration />
-            </PublicRoute>
+            // only can see if not log in, if user logged in it will not visible to user
+            <Registration />
           ),
         },
         {
           path: "/protected",
           element: (
-            <PrivateRoute>
-              <Protected />
-            </PrivateRoute>
+            // only can see after login both user and admin
+            <Protected />
           ),
         },
         {
           path: "/dashboard",
           element: (
-            <AdminRoute>
-              <DashBoard />
-            </AdminRoute>
+            // only can see after login and only for admin role
+            <DashBoard />
           ),
         },
         {
           path: "/products",
           element: (
-            <UserRoute>
-              <Products />
-            </UserRoute>
+            // only can see after login and only for user
+            <Products />
           ),
         },
       ],

@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useLoginMutation } from "../../features/auth/authApi";
 import Cookies from "js-cookie";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [login, { data, isLoading, isError }] = useLoginMutation();
+  const [login, { data, isLoading, isSuccess, isError }] = useLoginMutation();
 
   const handleLogin = (e) => {
     e.preventDefault();
     const loginCredential = { email, password };
     login(loginCredential);
+    navigate(from, { replace: true });
   };
 
   return (
